@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.commands.Drivetrain.MecanumDriveCmd;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,15 +33,14 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    driveSubsystemm.setDefaultCommand(
-      newMecanumDrive(
+    driveSubsystem.setDefaultCommand(
+      new MecanumDriveCmd(
         driveSubsystem,
         () -> m_driverController.getRawAxis(OperatorConstants.sideAxis),
         () -> m_driverController.getRawAxis(OperatorConstants.forwardAxis),
-        () -> m_driverController.getRawAxis(OperatorConstants.rotationAxis),
-
+        () -> m_driverController.getRawAxis(OperatorConstants.rotationAxis)
       )
-    )
+    );
     // Configure the trigger bindings
     configureBindings();
   }
